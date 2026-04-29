@@ -39,3 +39,6 @@ drwxrwxr-x 7 dinhlongbk dinhlongbk     4096 Apr 29 09:41 ..
 
 
 
+# flash
+adb reboot download
+fastboot flash boot new-boot.img

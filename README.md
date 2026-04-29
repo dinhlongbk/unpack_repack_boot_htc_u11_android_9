@@ -5,6 +5,7 @@ cp ../../../kernel_orig/boot.img ./
 
 # unpack
 ./magiskboot unpack boot.img
+
 ls -la
 total 126256
 drwxrwxr-x 2 dinhlongbk dinhlongbk     4096 Apr 29 09:43 .

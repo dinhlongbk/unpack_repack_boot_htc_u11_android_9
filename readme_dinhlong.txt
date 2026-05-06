@@ -1,3 +1,5 @@
+================ repack kernel =================
+
 cd Magisk-v19.4/x86
 
 copy boot.img to here
@@ -21,7 +23,7 @@ drwxrwxr-x 7 dinhlongbk dinhlongbk     4096 Apr 29 09:41 ..
 
 
 copy and replace kernel: 
-cp ../../../source_kernel_htc_ocn_android_9/arch/arm64/boot/Image.lz4-dtb kernel
+cp ../../../source_kernel_htc_ocn_android_9/arch/arm64/boot/Image.lz4 kernel
 # repack
 ./magiskboot repack boot.img
 
@@ -38,9 +40,29 @@ drwxrwxr-x 7 dinhlongbk dinhlongbk     4096 Apr 29 09:41 ..
 -rw-r--r-- 1 dinhlongbk dinhlongbk 55033856 Apr 29 09:45 new-boot.img
 -rw-r--r-- 1 dinhlongbk dinhlongbk  8137060 Apr 29 09:43 ramdisk.cpio
 
-
-
 # flash
 adb reboot download
 fastboot flash boot new-boot.img
 fastboot reboot
+
+
+
+
+
+
+
+
+================ repack ramdisk =================
+# unpack
+./magiskboot unpack twrp-3.7.0_9-0-ocn.img
+mkdir ramdisk
+cd ramdisk
+cpio -idmv < ../ramdisk.cpio
+
+
+# repack
+cd ramdisk
+find . | cpio -o -H newc > ../ramdisk.cpio
+cd ..
+./magiskboot repack twrp-3.7.0_9-0-ocn.img
+# output file: new-boot
